@@ -19,12 +19,12 @@ class ProtectedAdapter extends AwsS3Adapter implements SilverstripeProtectedAdap
      */
     protected $expiry = 300;
 
-    public function __construct(S3Client $client, $bucket, $prefix = '', array $options = [])
+    public function __construct(S3Client $client, $bucket, $prefix = null, array $options = [])
     {
         if (!$bucket) {
             throw new InvalidArgumentException("AWS_BUCKET_NAME environment variable not set");
         }
-        if (!$prefix) {
+        if ($prefix === null) {
             $prefix = 'protected';
         }
         parent::__construct($client, $bucket, $prefix, $options);
